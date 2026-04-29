@@ -1,6 +1,7 @@
 const mongoose = require("mongoose")
 
-mongoose.connect("mongodb://localhost:27017/DarkStore")
+const mongoURI = process.env.MONGO_URI || "mongodb://localhost:27017/DarkStore";
+mongoose.connect(mongoURI)
 
 const db = mongoose.connection
 

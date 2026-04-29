@@ -111,6 +111,7 @@ db.on("connected", () => {
     insertData()
 })
 
-server.listen(8024, () => {
-    console.log("server chalu 🤝 with Socket.io");
+const PORT = process.env.PORT || 8024;
+server.listen(PORT, () => {
+    console.log(`server chalu 🤝 with Socket.io on port ${PORT}`);
 })
