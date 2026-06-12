@@ -8,6 +8,8 @@ export default function Signup() {
         email: ""
     })
 
+    const [showPassword, setShowPassword] = useState(false);
+
     const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -35,7 +37,12 @@ export default function Signup() {
                 <input type="text" name="email" placeholder="Email" onChange={handleChange} />
                 <br /><br />
 
-                <input type="password" name="password" placeholder="Password" onChange={handleChange} />
+                <div style={{ position: 'relative', display: 'inline-block' }}>
+                    <input type={showPassword ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} style={{ paddingRight: '30px' }} />
+                    <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                        {showPassword ? "🙈" : "👁️"}
+                    </button>
+                </div>
                 <br /><br />
 
                 <button type="submit">SignUp</button>

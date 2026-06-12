@@ -43,6 +43,7 @@ export default function Home() {
         if (!container || duplicatedProducts.length === 0) return;
 
         const startAutoScroll = () => {
+            if (autoScrollRef.current) clearInterval(autoScrollRef.current);
             autoScrollRef.current = setInterval(() => {
                 if (container) {
                     container.scrollLeft += 1;
@@ -61,11 +62,15 @@ export default function Home() {
         startAutoScroll();
         container.addEventListener("mouseenter", stopAutoScroll);
         container.addEventListener("mouseleave", startAutoScroll);
+        container.addEventListener("touchstart", stopAutoScroll, { passive: true });
+        container.addEventListener("touchend", startAutoScroll);
 
         return () => {
             stopAutoScroll();
             container.removeEventListener("mouseenter", stopAutoScroll);
             container.removeEventListener("mouseleave", startAutoScroll);
+            container.removeEventListener("touchstart", stopAutoScroll);
+            container.removeEventListener("touchend", startAutoScroll);
         };
     }, [duplicatedProducts.length]);
 
@@ -74,6 +79,7 @@ export default function Home() {
         if (!container || duplicatedTrending.length === 0) return;
 
         const start = () => {
+            if (trendingAuto.current) clearInterval(trendingAuto.current);
             trendingAuto.current = setInterval(() => {
                 if (container) {
                     container.scrollLeft += 1;
@@ -91,11 +97,15 @@ export default function Home() {
         start();
         container.addEventListener("mouseenter", stop);
         container.addEventListener("mouseleave", start);
+        container.addEventListener("touchstart", stop, { passive: true });
+        container.addEventListener("touchend", start);
 
         return () => {
             stop();
             container.removeEventListener("mouseenter", stop);
             container.removeEventListener("mouseleave", start);
+            container.removeEventListener("touchstart", stop);
+            container.removeEventListener("touchend", start);
         };
     }, [duplicatedTrending.length]);
 
@@ -340,7 +350,7 @@ export default function Home() {
 
                     <Row className="justify-content-center g-4">
 
-                        <Col lg={4} md={5} sm={10} xs={12}>
+                        <Col lg={4} md={6} sm={10} xs={12}>
                             <Link to="/men" className="curated-card" onClick={() => fetchCategory("men")}>
                                 <div className="curated-image-wrap">
                                     <img src="https://www.thedarkstore.in/cdn/shop/files/trendy-relaxed-fit-t-shirt-mockup-ideal-for-casual-looks-and-simple-streetwear-style-02490.jpg?v=1763387753" className="curated-image" />
@@ -354,7 +364,7 @@ export default function Home() {
                             </Link>
                         </Col>
 
-                        <Col lg={4} md={5} sm={10} xs={12}>
+                        <Col lg={4} md={6} sm={10} xs={12}>
                             <Link to="/Women" className="curated-card">
                                 <div className="curated-image-wrap">
                                     <img src="https://www.thedarkstore.in/cdn/shop/files/stylish-relaxed-fit-hoodie-mockup-for-womens-loungewear-and-casual-wardrobe-01169_6d67caca-c9c5-4a99-8176-de01c8254e14.jpg?v=1763387808" className="curated-image" />

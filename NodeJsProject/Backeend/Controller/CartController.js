@@ -8,6 +8,12 @@ const getCart = async (req, res) => {
         
         if (!cart) {
             cart = await CartModel.create({ userEmail: email, items: [] });
+        } else {
+            const originalLength = cart.items.length;
+            cart.items = cart.items.filter(item => item.product != null);
+            if (cart.items.length !== originalLength) {
+                await cart.save();
+            }
         }
         res.status(200).json({ success: true, cart });
     } catch (error) {

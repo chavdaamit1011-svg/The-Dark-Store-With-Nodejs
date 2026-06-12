@@ -102,7 +102,7 @@ const resetpass = async (req, res) => {
             service: "gmail",
             auth: {
                 user: "chavdaamit1011@gmail.com",
-                pass: "oggdymwumbazcetx"
+                pass: "vfpjiewmavuxcwsw"
             }
         })
 

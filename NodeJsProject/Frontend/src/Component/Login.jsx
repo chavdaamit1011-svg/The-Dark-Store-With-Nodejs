@@ -14,6 +14,9 @@ export default function Login() {
     const [otp, setOtp] = useState("")
     const [newPassword, setNewPassword] = useState("")
 
+    const [showPassword, setShowPassword] = useState(false)
+    const [showNewPassword, setShowNewPassword] = useState(false)
+
 const handleChange = (e) => {
         setFormData({
             ...formData,
@@ -95,12 +98,18 @@ const handleChange = (e) => {
                     />
                     <br /><br />
 
-                    <input
-                        type="password"
-                        name="password"
-                        placeholder="Password"
-                        onChange={handleChange}
-                    />
+                    <div style={{ position: 'relative', display: 'inline-block' }}>
+                        <input
+                            type={showPassword ? "text" : "password"}
+                            name="password"
+                            placeholder="Password"
+                            onChange={handleChange}
+                            style={{ paddingRight: '30px' }}
+                        />
+                        <button type="button" onClick={() => setShowPassword(!showPassword)} style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                            {showPassword ? "🙈" : "👁️"}
+                        </button>
+                    </div>
                     <br /><br />
 
                     <button type="submit">Login</button>
@@ -135,12 +144,18 @@ const handleChange = (e) => {
 
                     {step === 3 && (
                         <div>
-                            <input
-                                type="password"
-                                placeholder="Enter new password"
-                                value={newPassword}
-                                onChange={(e) => setNewPassword(e.target.value)}
-                            />
+                            <div style={{ position: 'relative', display: 'inline-block' }}>
+                                <input
+                                    type={showNewPassword ? "text" : "password"}
+                                    placeholder="Enter new password"
+                                    value={newPassword}
+                                    onChange={(e) => setNewPassword(e.target.value)}
+                                    style={{ paddingRight: '30px' }}
+                                />
+                                <button type="button" onClick={() => setShowNewPassword(!showNewPassword)} style={{ position: 'absolute', right: '5px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', padding: 0 }}>
+                                    {showNewPassword ? "🙈" : "👁️"}
+                                </button>
+                            </div>
                             <br /><br />
                             <button onClick={updatePasswordFunc}>Update Password</button>
                         </div>
