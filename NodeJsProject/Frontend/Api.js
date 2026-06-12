@@ -1,8 +1,7 @@
 import axios from "axios";
 
 const Api = axios.create({
-    // baseURL: "https://the-dark-store-with-nodejs-1.onrender.com" // Live server
-    baseURL: "http://localhost:8024" // Local server
+    baseURL: import.meta.env.MODE === 'development' ? "http://localhost:8024" : "" 
 })
 
 export default Api

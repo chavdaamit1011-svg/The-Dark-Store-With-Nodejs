@@ -111,6 +111,17 @@ db.on("connected", () => {
     insertData()
 })
 
+const path = require("path");
+
+// Serve frontend static files
+const frontendDistPath = path.join(__dirname, "../Frontend/dist");
+app.use(express.static(frontendDistPath));
+
+// Catch-all route to hand over routing to React (must be the last route)
+app.get("*", (req, res) => {
+    res.sendFile(path.join(frontendDistPath, "index.html"));
+});
+
 const PORT = process.env.PORT || 8024;
 server.listen(PORT, () => {
     console.log(`server chalu 🤝 with Socket.io on port ${PORT}`);
