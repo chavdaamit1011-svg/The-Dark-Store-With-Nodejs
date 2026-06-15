@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from "axios"
+import Api from '../../Api'
 
 export default function Signup() {
     const [formData, setFormData] = useState({
@@ -21,7 +21,7 @@ export default function Signup() {
         e.preventDefault()
 
         try {
-            const res = await axios.post("http://localhost:8024/register", formData)
+            const res = await Api.post("/register", formData)
             alert(res.data.message)
         } catch (error) {
             console.error(error)

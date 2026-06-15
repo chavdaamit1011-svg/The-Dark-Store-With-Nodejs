@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import axios from "axios"
+import Api from '../../Api'
 
 export default function Login() {
     const [formData, setFormData] = useState({
@@ -28,7 +28,7 @@ const handleChange = (e) => {
         e.preventDefault()
 
         try {
-            const res = await axios.post("http://localhost:8024/login", formData)
+            const res = await Api.post("/login", formData)
 
             if (res.data.success) {
                 alert("Login Successful ✅")
@@ -42,7 +42,7 @@ const handleChange = (e) => {
 
     const sendOtp = async () => {
         try {
-            const res = await axios.post("http://localhost:8024/forgot-password", { email })
+            const res = await Api.post("/forgot-password", { email })
             alert(res.data.message)
 
             if (res.data.success) {
@@ -55,7 +55,7 @@ const handleChange = (e) => {
 
     const verifyOtpFunc = async () => {
         try {
-            const res = await axios.post("http://localhost:8024/verify-otp", { email, otp })
+            const res = await Api.post("/verify-otp", { email, otp })
             alert(res.data.message)
 
             if (res.data.success) {
@@ -68,7 +68,7 @@ const handleChange = (e) => {
 
     const updatePasswordFunc = async () => {
         try {
-            const res = await axios.post("http://localhost:8024/update-password", {
+            const res = await Api.post("/update-password", {
                 email,
                 newPassword
             })
