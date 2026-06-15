@@ -95,7 +95,7 @@ export default function AdminPanel() {
 
     useEffect(() => {
         // Connect admin socket
-        const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:8024';
+        const SOCKET_URL = import.meta.env.MODE === 'development' ? 'http://localhost:8024' : '';
         chatSocket.current = io(SOCKET_URL);
         chatSocket.current.emit('join_admin');
 

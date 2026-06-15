@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { io } from 'socket.io-client';
 
-const SOCKET_URL = import.meta.env.VITE_API_URL || 'http://localhost:8024';
+const SOCKET_URL = import.meta.env.MODE === 'development' ? 'http://localhost:8024' : '';
 let socket = null;
 
 const SUPPORT_OPTIONS = [
