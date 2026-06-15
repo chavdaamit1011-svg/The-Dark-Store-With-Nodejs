@@ -99,19 +99,21 @@ const resetpass = async (req, res) => {
         await user.save()
 
         const transporter = nodemailer.createTransport({
-            service: "gmail",
+            host: 'smtp-relay.brevo.com',
+            port: 2525,
+            secure: false, // true for 465, false for other ports
             auth: {
-                user: "chavdaamit1011@gmail.com",
-                pass: "vfpjiewmavuxcwsw"
+                user: process.env.BREVO_SMTP_USER,
+                pass: process.env.BREVO_SMTP_PASS
             }
-        })
+        });
 
         const mailoption = {
-            from: "chavdaamit1011@gmail.com",
+            from: `"The Dark Store" <${process.env.EMAIL_USER || "chavdaamit1011@gmail.com"}>`,
             to: email,
             subject: "Password Reset OTP",
             html: `<h3>Your OTP is: ${otp}</h3>`
-        }
+        };
 
         transporter.sendMail(mailoption, (err, info) => {
             if (err) {
