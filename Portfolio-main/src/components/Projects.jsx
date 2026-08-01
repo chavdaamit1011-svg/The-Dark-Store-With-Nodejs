@@ -1,16 +1,12 @@
 import React from 'react'
+import BorderGlow from './BorderGlow'
 
 const projects = [
   {
     id: 'kingqueen',
     title: 'KingQueen (E-Commerce)',
-    bannerBg: 'linear-gradient(135deg, #fef08a 0%, #eab308 100%)',
-    bannerContent: (
-      <div className="d-flex align-items-center justify-content-center gap-2 font-black fs-4 text-black fw-bold">
-        <i className="bi bi-person-fill-gear fs-3 text-dark"></i>
-        <span className="tracking-widest fw-extrabold text-dark">KING & QUEEN</span>
-      </div>
-    ),
+    domain: 'kingqueen.in',
+    imgUrl: 'https://s.wordpress.com/mshots/v1/http%3A%2F%2Fkingqueen.in%2F?w=800',
     description: 'E-Commerce fashion & lifestyle brand web platform featuring product listings, smooth cart interactions, and modern responsive layout.',
     tags: ['React.js', 'E-Commerce', 'Tailwind CSS'],
     link: 'http://kingqueen.in/',
@@ -19,13 +15,8 @@ const projects = [
   {
     id: 'destiny',
     title: 'Destiny Service Agency',
-    bannerBg: 'linear-gradient(135deg, #38bdf8 0%, #1d4ed8 100%)',
-    bannerContent: (
-      <div className="d-flex align-items-center justify-content-center gap-2 font-black fs-4 text-white fw-bold">
-        <i className="bi bi-globe2 fs-3 text-white"></i>
-        <span className="tracking-widest fw-extrabold text-white">DESTINY SERVICE</span>
-      </div>
-    ),
+    domain: 'destinyservice.nl',
+    imgUrl: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fdestinyservice.nl%2F?w=800',
     description: 'International business service agency website built with modern frontend architecture, service showcases, and responsive lead forms.',
     tags: ['Next.js', 'React', 'Responsive Design'],
     link: 'https://destinyservice.nl/',
@@ -34,15 +25,8 @@ const projects = [
   {
     id: 'sugar',
     title: 'Sugar Cosmetics UI',
-    bannerBg: 'linear-gradient(135deg, #fbcfe8 0%, #f472b6 100%)',
-    bannerContent: (
-      <div className="d-flex align-items-center justify-content-center gap-2 font-black fs-4 text-black fw-bold">
-        <div className="rounded-circle bg-black text-white d-flex align-items-center justify-content-center fw-bold" style={{ width: '38px', height: '38px', fontSize: '1.2rem' }}>
-          S
-        </div>
-        <span className="tracking-widest fw-extrabold">SUGAR</span>
-      </div>
-    ),
+    domain: 'cosmetic-123.netlify.app',
+    imgUrl: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fcosmetic-123.netlify.app%2F?w=800',
     description: 'Built a responsive e-commerce UI with product listing. Added Add to Cart, Login/Signup, Wishlist, and Purchase flow functionality.',
     tags: ['HTML', 'CSS', 'JavaScript'],
     link: 'https://cosmetic-123.netlify.app/',
@@ -51,15 +35,8 @@ const projects = [
   {
     id: 'kisah',
     title: 'Kisah Ethnic Wear',
-    bannerBg: 'linear-gradient(135deg, #a7f3d0 0%, #38bdf8 100%)',
-    bannerContent: (
-      <div className="d-flex align-items-center justify-content-center gap-2 font-black fs-4 text-black fw-bold">
-        <div className="rounded-circle bg-warning text-dark border border-2 border-dark d-flex align-items-center justify-content-center fw-bold" style={{ width: '38px', height: '38px', fontSize: '1.2rem' }}>
-          K
-        </div>
-        <span className="tracking-widest fw-bold text-dark">KISAH</span>
-      </div>
-    ),
+    domain: 'kisah-ecommerce.vercel.app',
+    imgUrl: 'https://s.wordpress.com/mshots/v1/https%3A%2F%2Fkisah-ecommerce-react-js.vercel.app%2F?w=800',
     description: 'Created an E-commerce website with reusable components, robust state management, and seamless API integration.',
     tags: ['React.js', 'State Management', 'API Integration'],
     link: 'https://kisah-ecommerce-react-js.vercel.app/',
@@ -68,13 +45,9 @@ const projects = [
   {
     id: 'darkstore',
     title: 'The Dark Store Backend',
-    bannerBg: 'linear-gradient(135deg, #18181b 0%, #27272a 100%)',
-    bannerContent: (
-      <div className="fs-4 text-white fw-extrabold tracking-wide">
-        The Dark Store
-      </div>
-    ),
-    description: 'Developed backend architecture featuring secure login, product catalog management, and a scalable database structure.',
+    domain: 'api.thedarkstore.internal',
+    isBackend: true,
+    description: 'Developed backend architecture featuring secure login, product catalog management, and a scalable MongoDB database structure.',
     tags: ['Node.js', 'Express.js', 'MongoDB'],
     link: '#contact',
     isExternal: false,
@@ -94,48 +67,91 @@ export default function Projects() {
         <div className="row g-4">
           {projects.map((proj) => (
             <div key={proj.id} className="col-md-6 col-lg-4">
-              <div className="custom-card h-100 p-3 d-flex flex-column justify-content-between">
-                <div>
-                  {/* Card Banner Image / Mockup Container */}
-                  <div
-                    className="rounded-3 d-flex align-items-center justify-content-center mb-4 p-4 shadow-sm"
-                    style={{ background: proj.bannerBg, height: '150px' }}
-                  >
-                    {proj.bannerContent}
+              <BorderGlow
+                className="h-100 p-3"
+                borderRadius={16}
+                edgeSensitivity={35}
+                glowRadius={35}
+                glowIntensity={1.2}
+                colors={['#00d2ff', '#a855f7', '#38bdf8']}
+              >
+                <div className="d-flex flex-column justify-content-between h-100">
+                  <div>
+                    {/* Browser Mockup Banner */}
+                    <div className="project-banner-container mb-4">
+                      <div className="browser-header-bar">
+                        <span className="browser-dot red"></span>
+                        <span className="browser-dot yellow"></span>
+                        <span className="browser-dot green"></span>
+                        <span className="browser-url-pill">{proj.domain}</span>
+                      </div>
+
+                      <div className="project-img-wrapper">
+                        {proj.isBackend ? (
+                          <div className="terminal-preview-box">
+                            <div className="terminal-line">
+                              <span className="keyword">const</span> express = <span className="string">require('express')</span>;
+                            </div>
+                            <div className="terminal-line">
+                              <span className="keyword">const</span> app = express();
+                            </div>
+                            <div className="terminal-line">
+                              <span className="comment">// MongoDB Auth & API</span>
+                            </div>
+                            <div className="terminal-line">
+                              app.use(<span className="string">'/api/products'</span>, router);
+                            </div>
+                            <div className="terminal-line">
+                              <span className="keyword">app.listen</span>(5000, () =&gt; <span className="string">'Server live'</span>);
+                            </div>
+                          </div>
+                        ) : (
+                          <img
+                            src={proj.imgUrl}
+                            alt={proj.title}
+                            className="project-img-preview"
+                            loading="lazy"
+                            onError={(e) => {
+                              e.target.style.display = 'none'
+                            }}
+                          />
+                        )}
+                      </div>
+                    </div>
+
+                    <h3 className="fs-5 fw-bold text-custom-heading mb-2">{proj.title}</h3>
+                    <p className="text-custom-muted small lh-base mb-4">{proj.description}</p>
                   </div>
 
-                  <h3 className="fs-5 fw-bold text-custom-heading mb-2">{proj.title}</h3>
-                  <p className="text-custom-muted small lh-base mb-4">{proj.description}</p>
-                </div>
+                  <div>
+                    <div className="d-flex flex-wrap gap-2 mb-3">
+                      {proj.tags.map((t) => (
+                        <span key={t} className="badge-custom py-1 px-3" style={{ fontSize: '0.75rem' }}>
+                          {t}
+                        </span>
+                      ))}
+                    </div>
 
-                <div>
-                  <div className="d-flex flex-wrap gap-2 mb-3">
-                    {proj.tags.map((t) => (
-                      <span key={t} className="badge-custom py-1 px-3" style={{ fontSize: '0.75rem' }}>
-                        {t}
-                      </span>
-                    ))}
+                    {proj.isExternal ? (
+                      <a
+                        href={proj.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="text-cyan small fw-semibold text-decoration-none d-inline-flex align-items-center gap-1"
+                      >
+                        View Live Project <i className="bi bi-arrow-up-right fs-6"></i>
+                      </a>
+                    ) : (
+                      <a
+                        href={proj.link}
+                        className="text-cyan small fw-semibold text-decoration-none d-inline-flex align-items-center gap-1"
+                      >
+                        Backend Architecture Details <i className="bi bi-arrow-right fs-6"></i>
+                      </a>
+                    )}
                   </div>
-
-                  {proj.isExternal ? (
-                    <a
-                      href={proj.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-cyan small fw-semibold text-decoration-none d-inline-flex align-items-center gap-1"
-                    >
-                      View Live Project <i className="bi bi-arrow-up-right fs-6"></i>
-                    </a>
-                  ) : (
-                    <a
-                      href={proj.link}
-                      className="text-cyan small fw-semibold text-decoration-none d-inline-flex align-items-center gap-1"
-                    >
-                      Backend Architecture Details <i className="bi bi-arrow-right fs-6"></i>
-                    </a>
-                  )}
                 </div>
-              </div>
+              </BorderGlow>
             </div>
           ))}
         </div>

@@ -1,5 +1,6 @@
 import React from 'react'
 import heroImg from '../assets/amit.jpeg'
+import BorderGlow from './BorderGlow'
 
 export default function About() {
   return (
@@ -12,15 +13,29 @@ export default function About() {
         </div>
 
         <div className="row align-items-center g-5">
-          {/* Left Column: Glowing Circular Profile Image */}
+          {/* Left Column: Profile Card Frame with Constant Animated BorderGlow */}
           <div className="col-lg-5 text-center">
-            <div className="position-relative d-inline-block">
-              <img
-                src={heroImg}
-                alt="Amit Chavda"
-                className="profile-img-glow"
-              />
-            </div>
+            <BorderGlow
+              className="profile-glow-container p-2 position-relative"
+              borderRadius={20}
+              edgeSensitivity={35}
+              glowRadius={35}
+              glowIntensity={1.2}
+              constantAnimated={true}
+              colors={['#00d2ff', '#a855f7', '#38bdf8']}
+            >
+              <div className="position-relative">
+                <img
+                  src={heroImg}
+                  alt="Amit Chavda"
+                  className="profile-img-square"
+                />
+                <div className="profile-experience-badge">
+                  <i className="bi bi-patch-check-fill text-cyan fs-5"></i>
+                  <span>MERN & Next.js Developer</span>
+                </div>
+              </div>
+            </BorderGlow>
           </div>
 
           {/* Right Column: Information & Cards */}
@@ -40,7 +55,14 @@ export default function About() {
             <div className="row g-4">
               {/* Work Experience Card */}
               <div className="col-12">
-                <div className="custom-card p-4">
+                <BorderGlow
+                  className="p-4"
+                  borderRadius={16}
+                  edgeSensitivity={35}
+                  glowRadius={35}
+                  glowIntensity={1.2}
+                  colors={['#00d2ff', '#a855f7', '#38bdf8']}
+                >
                   <div className="d-flex align-items-center justify-content-between mb-3 flex-wrap gap-2">
                     <div className="d-flex align-items-center">
                       <i className="bi bi-briefcase-fill text-cyan fs-4 me-2"></i>
@@ -63,12 +85,19 @@ export default function About() {
                       Working on live client web projects using React.js, Next.js, Node.js, Express, and MongoDB to deliver high-performance responsive web applications.
                     </p>
                   </div>
-                </div>
+                </BorderGlow>
               </div>
 
               {/* Education Card */}
               <div className="col-md-6">
-                <div className="custom-card p-4 h-100">
+                <BorderGlow
+                  className="p-4 h-100"
+                  borderRadius={16}
+                  edgeSensitivity={35}
+                  glowRadius={35}
+                  glowIntensity={1.2}
+                  colors={['#00d2ff', '#a855f7', '#38bdf8']}
+                >
                   <div className="d-flex align-items-center mb-3">
                     <i className="bi bi-ui-checks text-cyan fs-4 me-2"></i>
                     <h4 className="fs-5 fw-bold text-custom-heading mb-0">Education</h4>
@@ -89,12 +118,19 @@ export default function About() {
                     <p className="text-custom-muted small mb-1">Monark University</p>
                     <span className="text-custom-muted small">2021 - 2024 (First Class)</span>
                   </div>
-                </div>
+                </BorderGlow>
               </div>
 
               {/* Certification Card */}
               <div className="col-md-6">
-                <div className="custom-card p-4 h-100">
+                <BorderGlow
+                  className="p-4 h-100"
+                  borderRadius={16}
+                  edgeSensitivity={35}
+                  glowRadius={35}
+                  glowIntensity={1.2}
+                  colors={['#00d2ff', '#a855f7', '#38bdf8']}
+                >
                   <div className="d-flex align-items-center mb-3">
                     <i className="bi bi-patch-check-fill text-cyan fs-4 me-2"></i>
                     <h4 className="fs-5 fw-bold text-custom-heading mb-0">Certification</h4>
@@ -109,7 +145,7 @@ export default function About() {
                       Attending
                     </span>
                   </div>
-                </div>
+                </BorderGlow>
               </div>
             </div>
           </div>

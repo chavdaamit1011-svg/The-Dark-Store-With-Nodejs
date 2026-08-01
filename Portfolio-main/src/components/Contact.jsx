@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import BorderGlow from './BorderGlow'
 
 export default function Contact() {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' })
@@ -29,43 +30,49 @@ export default function Contact() {
               back to you!
             </p>
 
-            <div className="d-flex flex-column gap-4 mb-4">
+            <div className="d-flex flex-column gap-3 mb-4">
               {/* Location */}
-              <div className="d-flex align-items-center">
-                <div className="rounded-circle bg-dark p-3 me-3 text-cyan border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                  <i className="bi bi-geo-alt-fill fs-5"></i>
+              <BorderGlow className="p-3" borderRadius={14} edgeSensitivity={35} glowRadius={30}>
+                <div className="d-flex align-items-center">
+                  <div className="rounded-circle bg-dark p-3 me-3 text-cyan border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                    <i className="bi bi-geo-alt-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h4 className="fs-6 fw-bold text-custom-heading mb-0">Location</h4>
+                    <p className="text-custom-muted small mb-0">Ahmedabad, Gujarat, India</p>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="fs-6 fw-bold text-custom-heading mb-0">Location</h4>
-                  <p className="text-custom-muted small mb-0">Ahmedabad, Gujarat, India</p>
-                </div>
-              </div>
+              </BorderGlow>
 
               {/* Email */}
-              <div className="d-flex align-items-center">
-                <div className="rounded-circle bg-dark p-3 me-3 text-cyan border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                  <i className="bi bi-envelope-fill fs-5"></i>
+              <BorderGlow className="p-3" borderRadius={14} edgeSensitivity={35} glowRadius={30}>
+                <div className="d-flex align-items-center">
+                  <div className="rounded-circle bg-dark p-3 me-3 text-cyan border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                    <i className="bi bi-envelope-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h4 className="fs-6 fw-bold text-custom-heading mb-0">Email</h4>
+                    <a href="mailto:chavdaamit1011@gmail.com" className="text-custom-muted small text-decoration-none hover-white mb-0">
+                      chavdaamit1011@gmail.com
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="fs-6 fw-bold text-custom-heading mb-0">Email</h4>
-                  <a href="mailto:chavdaamit1011@gmail.com" className="text-custom-muted small text-decoration-none hover-white mb-0">
-                    chavdaamit1011@gmail.com
-                  </a>
-                </div>
-              </div>
+              </BorderGlow>
 
               {/* Phone */}
-              <div className="d-flex align-items-center">
-                <div className="rounded-circle bg-dark p-3 me-3 text-cyan border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
-                  <i className="bi bi-telephone-fill fs-5"></i>
+              <BorderGlow className="p-3" borderRadius={14} edgeSensitivity={35} glowRadius={30}>
+                <div className="d-flex align-items-center">
+                  <div className="rounded-circle bg-dark p-3 me-3 text-cyan border border-secondary border-opacity-25 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
+                    <i className="bi bi-telephone-fill fs-5"></i>
+                  </div>
+                  <div>
+                    <h4 className="fs-6 fw-bold text-custom-heading mb-0">Phone</h4>
+                    <a href="tel:+919998320342" className="text-custom-muted small text-decoration-none hover-white mb-0">
+                      +91-9998320342
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <h4 className="fs-6 fw-bold text-custom-heading mb-0">Phone</h4>
-                  <a href="tel:+919998320342" className="text-custom-muted small text-decoration-none hover-white mb-0">
-                    +91-9998320342
-                  </a>
-                </div>
-              </div>
+              </BorderGlow>
             </div>
 
             {/* Social Links */}
@@ -93,9 +100,9 @@ export default function Contact() {
             </div>
           </div>
 
-          {/* Right Column: Contact Form */}
+          {/* Right Column: Contact Form Card wrapped with BorderGlow */}
           <div className="col-lg-7">
-            <div className="custom-card p-4 p-md-5">
+            <BorderGlow className="p-4 p-md-5" borderRadius={20} edgeSensitivity={35} glowRadius={40}>
               <h3 className="fs-4 fw-bold text-custom-heading mb-4">Send me a message</h3>
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
@@ -132,14 +139,14 @@ export default function Contact() {
                   Send Message
                 </button>
               </form>
-            </div>
+            </BorderGlow>
           </div>
         </div>
 
         {/* Footer */}
         <footer className="text-center text-custom-muted small border-top border-secondary border-opacity-25 pt-4 mt-5">
           <p className="mb-0">
-            © {new Date().getFullYear()} Amit Chavda. Built with React & bootstrap.
+            © {new Date().getFullYear()} Amit Chavda. Built with React & Bootstrap.
           </p>
         </footer>
       </div>
