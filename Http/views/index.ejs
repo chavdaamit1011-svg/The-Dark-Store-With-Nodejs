@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <h1>Hello Ejs</h1>
+
+    <form action="/insertdata" method="post">
+        <input type="text" placeholder="id" name="id">
+        <input type="text" placeholder="name" name="name">
+        <input type="submit">
+    </form>
+
+  <table>
+    <tr>
+        <th>id</th>
+        <th>name</th>
+        <th>actions</th>
+    </tr>
+
+    <% student.map((ele) => { %>
+        <tr>
+            <td><%= ele.id %></td>
+            <td><%= ele.name %></td>
+            <td>
+              
+                <form action="/updatedata" method="post">
+                    <input type="hidden" name="id" value="<%= ele.id %>">
+                    <input type="text" name="name" placeholder="new name">
+                    <button type="submit">Update</button>
+                </form>
+
+               
+                <form action="/deletedata" method="post">
+                    <input type="hidden" name="id" value="<%= ele.id %>" placeholder="delet">
+                    <button type="submit">Delete</button>
+                </form>
+            </td>
+        </tr>
+    <% }) %>
+</table>
+
+    
+</body>
+</html>
