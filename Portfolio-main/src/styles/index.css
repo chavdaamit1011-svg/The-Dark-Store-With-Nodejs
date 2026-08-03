@@ -164,9 +164,9 @@ body {
   z-index: 0;
 }
 
-/* Liquid Glassmorphism Navbar Container */
-.liquid-glass-navbar {
-  background: var(--nav-bg);
+/* Center Navigation Floating Glass Dock (Inner Glass Container) */
+.glass-nav-dock {
+  background: rgba(18, 20, 29, 0.65);
   backdrop-filter: blur(18px) saturate(180%);
   -webkit-backdrop-filter: blur(18px) saturate(180%);
   border: 1px solid rgba(255, 255, 255, 0.12);
@@ -174,29 +174,18 @@ body {
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.15),
-    0 0 20px rgba(0, 210, 255, 0.15);
+    0 0 20px rgba(0, 210, 255, 0.12);
+  padding: 0.35rem 0.6rem;
   transition: all 0.4s ease;
 }
 
-[data-theme='light'] .liquid-glass-navbar {
+[data-theme='light'] .glass-nav-dock {
   background: rgba(255, 255, 255, 0.78);
   border-color: rgba(0, 0, 0, 0.08);
   box-shadow: 
     0 10px 30px rgba(0, 0, 0, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.9),
     0 0 20px rgba(2, 132, 199, 0.1);
-}
-
-/* Center Part Liquid Glass Pill Container */
-.liquid-glass-pill-container {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 50rem;
-}
-
-[data-theme='light'] .liquid-glass-pill-container {
-  background: rgba(0, 0, 0, 0.03);
-  border-color: rgba(0, 0, 0, 0.06);
 }
 
 .brand-text {

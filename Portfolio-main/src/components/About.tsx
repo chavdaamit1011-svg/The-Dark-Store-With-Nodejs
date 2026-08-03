@@ -140,9 +140,10 @@ export default function About() {
                     <h5 className="fs-6 fw-semibold text-custom-heading mb-1">
                       Full Stack Web Development
                     </h5>
-                    <p className="text-custom-muted small mb-3">Red & White Multimedia Education</p>
+                    <p className="text-custom-muted small mb-1">Red & White Multimedia Education</p>
+                    <p className="text-cyan small fw-medium mb-3">May 2025 – April 2026 (Completed)</p>
                     <span className="badge bg-success bg-opacity-25 text-success border border-success border-opacity-25 rounded-pill px-3 py-2">
-                      Attending
+                      <i className="bi bi-patch-check-fill me-1"></i> Completed
                     </span>
                   </div>
                 </BorderGlow>

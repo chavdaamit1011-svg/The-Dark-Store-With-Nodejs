@@ -41,42 +41,89 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
 
   return (
     <>
-      <nav className={`navbar navbar-expand-lg fixed-top navbar-custom ${scrolled ? 'py-2 shadow-lg' : 'py-3'}`}>
+      <header className={`fixed-top w-100 z-50 transition-all ${scrolled ? 'py-2' : 'py-3'}`}>
         <div className="container px-3 px-lg-4">
-          {/* Left Side: Profile Avatar Icon + Cursive Script Brand Logo */}
-          <div className="d-flex align-items-center gap-2">
-            <button
-              className="profile-nav-btn"
-              onClick={() => setIsProfileOpen(true)}
-              aria-label="Open Profile Overview"
-              title="View Profile Overview"
-            >
-              <img src={heroImg} alt="Profile" className="profile-nav-avatar" />
-            </button>
+          <div className="d-flex align-items-center justify-content-between py-1">
+            
+            {/* PART 1: LEFT SIDE (Profile Icon + Cursive Script Brand Logo) */}
+            <div className="d-flex align-items-center gap-2">
+              <button
+                className="profile-nav-btn"
+                onClick={() => setIsProfileOpen(true)}
+                aria-label="Open Profile Overview"
+                title="View Profile Overview"
+              >
+                <img src={heroImg} alt="Profile" className="profile-nav-avatar" />
+              </button>
 
-            <a className="navbar-brand brand-text m-0" href="#home">
-              <span className="brand-a">𝓐</span>
-              <span className="text-custom-heading">𝓶𝓲𝓽.</span>
-            </a>
-          </div>
+              <a className="navbar-brand brand-text m-0" href="#home">
+                <span className="brand-a">𝓐</span>
+                <span className="text-custom-heading">𝓶𝓲𝓽.</span>
+              </a>
+            </div>
 
-          <div className="d-flex align-items-center gap-2 gap-sm-3">
-            {/* Mobile Uiverse SVG Theme Toggle */}
-            <div className="d-lg-none">
-              <label className="themeToggle st-sunMoonThemeToggleBtn" htmlFor="themeToggleMobile">
+            {/* PART 2: CENTER (Floating Inner Glass Dock for Navigation Links) */}
+            <div className="d-none d-lg-block">
+              <ul className="nav flex-row align-items-center gap-1 glass-nav-dock mb-0 list-unstyled">
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'home' ? 'active' : ''}`}
+                    href="#home"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'about' ? 'active' : ''}`}
+                    href="#about"
+                  >
+                    About
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'skills' ? 'active' : ''}`}
+                    href="#skills"
+                  >
+                    Skills
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'projects' ? 'active' : ''}`}
+                    href="#projects"
+                  >
+                    Projects
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'contact' ? 'active' : ''}`}
+                    href="#contact"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
+
+            {/* PART 3: RIGHT SIDE (Uiverse SVG Theme Toggle Button) */}
+            <div className="d-flex align-items-center gap-2">
+              <label className="themeToggle st-sunMoonThemeToggleBtn" htmlFor="themeToggleBtn">
                 <input
                   type="checkbox"
-                  id="themeToggleMobile"
+                  id="themeToggleBtn"
                   className="themeToggleInput"
                   checked={theme === 'light'}
                   onChange={toggleTheme}
                 />
-                <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" stroke="none">
-                  <mask id="moon-mask-mobile">
+                <svg width="20" height="20" viewBox="0 0 20 20" fill="currentColor" stroke="none">
+                  <mask id="moon-mask-nav">
                     <rect x="0" y="0" width="20" height="20" fill="white"></rect>
                     <circle cx="11" cy="3" r="8" fill="black"></circle>
                   </mask>
-                  <circle className="sunMoon" cx="10" cy="10" r="8" mask="url(#moon-mask-mobile)"></circle>
+                  <circle className="sunMoon" cx="10" cy="10" r="8" mask="url(#moon-mask-nav)"></circle>
                   <g>
                     <circle className="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle>
                     <circle className="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle>
@@ -87,95 +134,71 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
                   </g>
                 </svg>
               </label>
-            </div>
 
-            <button
-              className="navbar-toggler border-0 shadow-none p-1"
-              type="button"
-              data-bs-toggle="collapse"
-              data-bs-target="#navbarNav"
-              aria-controls="navbarNav"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i className="bi bi-list fs-1 text-custom-heading"></i>
-            </button>
+              {/* Mobile Toggler */}
+              <button
+                className="navbar-toggler border-0 shadow-none p-1 d-lg-none"
+                type="button"
+                data-bs-toggle="collapse"
+                data-bs-target="#mobileNavCollapse"
+                aria-controls="mobileNavCollapse"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+              >
+                <i className="bi bi-list fs-2 text-custom-heading"></i>
+              </button>
+            </div>
           </div>
 
-          <div className="collapse navbar-collapse justify-content-end" id="navbarNav">
-            <ul className="navbar-nav ms-auto align-items-center gap-1 gap-lg-3 mt-3 mt-lg-0">
-              <li className="nav-item">
-                <a
-                  className={`nav-link nav-link-custom ${activeSection === 'home' ? 'active' : ''}`}
-                  href="#home"
-                >
-                  Home
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link nav-link-custom ${activeSection === 'about' ? 'active' : ''}`}
-                  href="#about"
-                >
-                  About
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link nav-link-custom ${activeSection === 'skills' ? 'active' : ''}`}
-                  href="#skills"
-                >
-                  Skills
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link nav-link-custom ${activeSection === 'projects' ? 'active' : ''}`}
-                  href="#projects"
-                >
-                  Projects
-                </a>
-              </li>
-              <li className="nav-item">
-                <a
-                  className={`nav-link nav-link-custom ${activeSection === 'contact' ? 'active' : ''}`}
-                  href="#contact"
-                >
-                  Contact
-                </a>
-              </li>
-
-              {/* Desktop Uiverse SVG Theme Toggle */}
-              <li className="nav-item ms-lg-2 d-none d-lg-block">
-                <label className="themeToggle st-sunMoonThemeToggleBtn" htmlFor="themeToggleDesktop">
-                  <input
-                    type="checkbox"
-                    id="themeToggleDesktop"
-                    className="themeToggleInput"
-                    checked={theme === 'light'}
-                    onChange={toggleTheme}
-                  />
-                  <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor" stroke="none">
-                    <mask id="moon-mask-desktop">
-                      <rect x="0" y="0" width="20" height="20" fill="white"></rect>
-                      <circle cx="11" cy="3" r="8" fill="black"></circle>
-                    </mask>
-                    <circle className="sunMoon" cx="10" cy="10" r="8" mask="url(#moon-mask-desktop)"></circle>
-                    <g>
-                      <circle className="sunRay sunRay1" cx="18" cy="10" r="1.5"></circle>
-                      <circle className="sunRay sunRay2" cx="14" cy="16.928" r="1.5"></circle>
-                      <circle className="sunRay sunRay3" cx="6" cy="16.928" r="1.5"></circle>
-                      <circle className="sunRay sunRay4" cx="2" cy="10" r="1.5"></circle>
-                      <circle className="sunRay sunRay5" cx="6" cy="3.1718" r="1.5"></circle>
-                      <circle className="sunRay sunRay6" cx="14" cy="3.1718" r="1.5"></circle>
-                    </g>
-                  </svg>
-                </label>
-              </li>
-            </ul>
+          {/* Mobile Collapsible Navigation Menu */}
+          <div className="collapse navbar-collapse d-lg-none mt-2" id="mobileNavCollapse">
+            <div className="glass-nav-dock p-3 text-center">
+              <ul className="navbar-nav flex-column gap-2">
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'home' ? 'active' : ''}`}
+                    href="#home"
+                  >
+                    Home
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'about' ? 'active' : ''}`}
+                    href="#about"
+                  >
+                    About
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'skills' ? 'active' : ''}`}
+                    href="#skills"
+                  >
+                    Skills
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'projects' ? 'active' : ''}`}
+                    href="#projects"
+                  >
+                    Projects
+                  </a>
+                </li>
+                <li className="nav-item">
+                  <a
+                    className={`nav-link nav-link-custom ${activeSection === 'contact' ? 'active' : ''}`}
+                    href="#contact"
+                  >
+                    Contact
+                  </a>
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </nav>
+      </header>
 
       {/* Profile Page Overview Modal */}
       <div
