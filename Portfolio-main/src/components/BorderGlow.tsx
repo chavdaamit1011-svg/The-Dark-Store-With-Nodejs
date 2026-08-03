@@ -16,6 +16,7 @@ interface BorderGlowProps {
   colors?: string[];
   fillOpacity?: number;
   style?: CSSProperties;
+  onClick?: () => void;
 }
 
 function parseHSL(hslStr: string) {
@@ -80,7 +81,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   className = '',
   edgeSensitivity = 30,
   glowColor = '40 80 80',
-  backgroundColor = 'var(--card-bg)',
+  backgroundColor,
   borderRadius = 16,
   glowRadius = 40,
   glowIntensity = 1.0,
@@ -90,6 +91,7 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
   colors = ['#00d2ff', '#a855f7', '#38bdf8'],
   fillOpacity = 0.5,
   style = {},
+  onClick,
 }) => {
   const cardRef = useRef<HTMLDivElement>(null);
 
@@ -186,9 +188,10 @@ const BorderGlow: React.FC<BorderGlowProps> = ({
     <div
       ref={cardRef}
       onPointerMove={handlePointerMove}
+      onClick={onClick}
       className={`border-glow-card ${className}`}
       style={{
-        '--card-bg': backgroundColor,
+        ...(backgroundColor ? { '--card-bg': backgroundColor } : {}),
         '--edge-sensitivity': edgeSensitivity,
         '--border-radius': `${borderRadius}px`,
         '--glow-padding': `${glowRadius}px`,

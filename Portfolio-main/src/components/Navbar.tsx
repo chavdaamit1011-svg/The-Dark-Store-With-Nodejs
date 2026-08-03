@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
+import { NavLink } from 'react-router-dom'
 import heroImg from '../assets/amit.jpeg'
 
 interface NavbarProps {
@@ -7,41 +8,11 @@ interface NavbarProps {
 }
 
 export default function Navbar({ theme, toggleTheme }: NavbarProps) {
-  const [activeSection, setActiveSection] = useState('home')
-  const [scrolled, setScrolled] = useState(false)
   const [isProfileOpen, setIsProfileOpen] = useState(false)
-
-  useEffect(() => {
-    const handleScroll = () => {
-      if (window.scrollY > 30) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
-      }
-
-      const sections = ['home', 'about', 'skills', 'projects', 'contact']
-      const scrollPosition = window.scrollY + 200
-
-      for (const section of sections) {
-        const el = document.getElementById(section)
-        if (el) {
-          const top = el.offsetTop
-          const height = el.offsetHeight
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            setActiveSection(section)
-            break
-          }
-        }
-      }
-    }
-
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
-  }, [])
 
   return (
     <>
-      <header className={`fixed-top w-100 z-50 transition-all ${scrolled ? 'py-2' : 'py-3'}`}>
+      <header className="fixed-top w-100 z-50 py-3">
         <div className="container px-3 px-lg-4">
           <div className="d-flex align-items-center justify-content-between py-1">
             
@@ -56,54 +27,55 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
                 <img src={heroImg} alt="Profile" className="profile-nav-avatar" />
               </button>
 
-              <a className="navbar-brand brand-text m-0" href="#home">
+              <NavLink className="navbar-brand brand-text m-0" to="/">
                 <span className="brand-a">𝓐</span>
                 <span className="text-custom-heading">𝓶𝓲𝓽.</span>
-              </a>
+              </NavLink>
             </div>
 
-            {/* PART 2: CENTER (Floating Inner Glass Dock for Navigation Links) */}
+            {/* PART 2: CENTER (Floating Inner Glass Dock for Multi-Page Navigation Links) */}
             <div className="d-none d-lg-block">
               <ul className="nav flex-row align-items-center gap-1 glass-nav-dock mb-0 list-unstyled">
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'home' ? 'active' : ''}`}
-                    href="#home"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/"
+                    end
                   >
                     Home
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'about' ? 'active' : ''}`}
-                    href="#about"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/about"
                   >
                     About
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'skills' ? 'active' : ''}`}
-                    href="#skills"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/services"
                   >
-                    Skills
-                  </a>
+                    Services
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'projects' ? 'active' : ''}`}
-                    href="#projects"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/projects"
                   >
                     Projects
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'contact' ? 'active' : ''}`}
-                    href="#contact"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/contact"
                   >
                     Contact
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -155,44 +127,45 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
             <div className="glass-nav-dock p-3 text-center">
               <ul className="navbar-nav flex-column gap-2">
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'home' ? 'active' : ''}`}
-                    href="#home"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/"
+                    end
                   >
                     Home
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'about' ? 'active' : ''}`}
-                    href="#about"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/about"
                   >
                     About
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'skills' ? 'active' : ''}`}
-                    href="#skills"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/services"
                   >
-                    Skills
-                  </a>
+                    Services
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'projects' ? 'active' : ''}`}
-                    href="#projects"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/projects"
                   >
                     Projects
-                  </a>
+                  </NavLink>
                 </li>
                 <li className="nav-item">
-                  <a
-                    className={`nav-link nav-link-custom ${activeSection === 'contact' ? 'active' : ''}`}
-                    href="#contact"
+                  <NavLink
+                    className={({ isActive }) => `nav-link nav-link-custom ${isActive ? 'active' : ''}`}
+                    to="/contact"
                   >
                     Contact
-                  </a>
+                  </NavLink>
                 </li>
               </ul>
             </div>
@@ -254,13 +227,13 @@ export default function Navbar({ theme, toggleTheme }: NavbarProps) {
             >
               <i className="bi bi-whatsapp"></i> Chat on WhatsApp
             </a>
-            <a
-              href="#contact"
+            <NavLink
+              to="/contact"
               onClick={() => setIsProfileOpen(false)}
               className="btn btn-outline-cyan rounded-pill flex-grow-1 py-2 fw-semibold d-flex align-items-center justify-content-center gap-2"
             >
               <i className="bi bi-envelope-fill"></i> Contact Me
-            </a>
+            </NavLink>
           </div>
         </div>
       </div>

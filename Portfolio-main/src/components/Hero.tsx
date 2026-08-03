@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react'
+import { Link } from 'react-router-dom'
 
 const phrases = ['Full Stack Web Developer', 'Passionate Fast Learner', 'MERN Stack - Next.js Developer']
 
@@ -55,12 +56,12 @@ export default function Hero() {
         </div>
 
         <div className="d-flex flex-wrap justify-content-center gap-3 mt-4 mb-4">
-          <a href="#projects" className="btn btn-cyan btn-lg rounded-pill px-4 py-3 fs-6">
+          <Link to="/projects" className="btn btn-cyan btn-lg rounded-pill px-4 py-3 fs-6">
             View My Work
-          </a>
-          <a href="#contact" className="btn btn-outline-cyan btn-lg rounded-pill px-4 py-3 fs-6">
+          </Link>
+          <Link to="/contact" className="btn btn-outline-cyan btn-lg rounded-pill px-4 py-3 fs-6">
             Contact Me
-          </a>
+          </Link>
         </div>
 
         {/* Hero Social Icon Bar */}
