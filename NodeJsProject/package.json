@@ -1,0 +1,13 @@
+{
+  "name": "nodejsproject-root",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently \"npm --prefix Backeend run dev\" \"npm --prefix Frontend run dev\"",
+    "start:backend": "npm --prefix Backeend start",
+    "build:frontend": "npm --prefix Frontend run build"
+  },
+  "devDependencies": {
+    "concurrently": "^10.0.4"
+  }
+}
