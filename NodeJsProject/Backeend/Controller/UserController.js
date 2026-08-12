@@ -98,29 +98,46 @@ const resetpass = async (req, res) => {
         user.otpExpire = Date.now() + 60000 // 1 Minute validity (60,000 ms)
         await user.save()
 
-        const transporter = nodemailer.createTransport({
+        const smtpUser = process.env.BREVO_SMTP_USER || process.env.EMAIL_USER
+        const smtpPass = process.env.BREVO_SMTP_PASS || process.env.EMAIL_PASS
+        const useBrevo = Boolean(process.env.BREVO_SMTP_USER && process.env.BREVO_SMTP_PASS)
+
+        if (!smtpUser || !smtpPass) {
+            console.error("SMTP credentials missing. Set BREVO_SMTP_USER/BREVO_SMTP_PASS or EMAIL_USER/EMAIL_PASS in .env")
+            return res.json({ success: false, message: "SMTP settings are not configured." })
+        }
+
+        const transporter = nodemailer.createTransport(useBrevo ? {
             host: 'smtp-relay.brevo.com',
             port: 2525,
-            secure: false, // true for 465, false for other ports
+            secure: false,
             auth: {
-                user: process.env.BREVO_SMTP_USER,
-                pass: process.env.BREVO_SMTP_PASS
+                user: smtpUser,
+                pass: smtpPass
             }
-        });
+        } : {
+            host: 'smtp.gmail.com',
+            port: 587,
+            secure: false,
+            auth: {
+                user: smtpUser,
+                pass: smtpPass
+            }
+        })
 
         const mailoption = {
-            from: `"The Dark Store" <${process.env.EMAIL_USER || "chavdaamit1011@gmail.com"}>`,
+            from: `"The Dark Store" <${smtpUser}>`,
             to: email,
             subject: "Password Reset OTP",
             html: `<h3>Your OTP is: ${otp}</h3>`
-        };
+        }
 
         transporter.sendMail(mailoption, (err, info) => {
             if (err) {
-                console.log(err)
+                console.error("Error sending password reset mail:", err)
                 return res.json({ success: false, message: "Error sending mail" })
             } else {
-                console.log(info)
+                console.log("Password reset OTP sent:", info.response || info)
                 return res.json({ success: true, message: "OTP sent successfully" })
             }
         })

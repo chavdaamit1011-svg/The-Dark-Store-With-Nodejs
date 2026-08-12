@@ -7,6 +7,8 @@ if (!mongoURI) {
     process.exit(1)
 }
 
+console.log("MongoDb connecting to:", mongoURI)
+
 mongoose.connect(mongoURI)
     .catch((err) => {
         console.error("MongoDb initial connection error:", err)
