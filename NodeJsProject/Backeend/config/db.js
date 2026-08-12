@@ -1,9 +1,9 @@
 const mongoose = require("mongoose")
 
-const mongoURI = process.env.MONGO_URI
+const mongoURI = process.env.MONGO_URI || process.env.MONGODB_ATLAS_URI
 
 if (!mongoURI) {
-    console.error("MongoDb connection failed: MONGO_URI is not defined in .env")
+    console.error("MongoDb connection failed: MONGO_URI or MONGODB_ATLAS_URI is not defined in .env")
     process.exit(1)
 }
 
@@ -11,7 +11,7 @@ mongoose.connect(mongoURI)
     .catch((err) => {
         console.error("MongoDb initial connection error:", err)
         if (err.message && err.message.toLowerCase().includes("authentication failed")) {
-            console.error("Mongo auth failed. Verify MONGO_URI username/password and Atlas IP access settings.")
+            console.error("Mongo auth failed. Verify Mongo URI username/password and Atlas IP access settings.")
         }
         process.exit(1)
     })
