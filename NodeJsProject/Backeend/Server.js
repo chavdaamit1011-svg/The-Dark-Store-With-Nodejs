@@ -106,23 +106,30 @@ const insertData = async () => {
         console.log("❌ Error refreshing data:", err)
     }
 }
-// Run refresh when DB is connected
-db.on("connected", () => {
-    insertData()
+// Run refresh and start server only when DB is connected
+const path = require("path")
+
+const frontendDistPath = path.join(__dirname, "../Frontend/dist")
+app.use(express.static(frontendDistPath))
+
+app.use((req, res) => {
+    res.sendFile(path.join(frontendDistPath, "index.html"))
 })
 
-const path = require("path");
+const PORT = process.env.PORT || 8024
 
-// Serve frontend static files
-const frontendDistPath = path.join(__dirname, "../Frontend/dist");
-app.use(express.static(frontendDistPath));
+db.once("open", async () => {
+    try {
+        await insertData()
+    } catch (err) {
+        console.error("Error refreshing DB seed data:", err)
+    }
 
-// Catch-all route to hand over routing to React (must be the last route)
-app.use((req, res) => {
-    res.sendFile(path.join(frontendDistPath, "index.html"));
-});
+    server.listen(PORT, () => {
+        console.log(`server chalu 🤝 with Socket.io on port ${PORT}`)
+    })
+})
 
-const PORT = process.env.PORT || 8024;
-server.listen(PORT, () => {
-    console.log(`server chalu 🤝 with Socket.io on port ${PORT}`);
+db.on("error", (err) => {
+    console.error("MongoDb error after initial connection:", err)
 })
